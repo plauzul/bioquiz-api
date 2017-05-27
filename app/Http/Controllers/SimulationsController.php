@@ -32,6 +32,6 @@ class SimulationsController extends Controller {
         //     }
         // ]
 
-        return "deixa para a proxima semana porque sa porra é foda";
+        dd($request->all());
     }
 }
