@@ -28,7 +28,8 @@ $app->group(['prefix' => 'api', 'middleware' => 'cors'], function() use ($app) {
     });
 
     $app->group(['prefix' => 'simulations'/*, 'middleware' => 'auth:api'*/], function() use ($app) {
-        $app->post('/result/{idUser}/{idProof}', 'SimulationsController@result');
+        $app->post('/result/{idUser}/{idProof}', 'SimulationsController@setResult');
+        $app->get('/result/{idUser}', 'SimulationsController@getResult');
         $app->get('/proofs', 'SimulationsController@proofs');
         $app->get('/questions/{idProof}', 'SimulationsController@questions');
     });
