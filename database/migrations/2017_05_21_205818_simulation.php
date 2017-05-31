@@ -15,11 +15,11 @@ class Simulation extends Migration {
         Schema::create('simulations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('proof_id');
-            $table->string('question');
-            $table->string('a');
-            $table->string('b');
-            $table->string('c');
-            $table->string('d');
+            $table->text('question');
+            $table->text('a');
+            $table->text('b');
+            $table->text('c');
+            $table->text('d');
             $table->string('correct');
             $table->timestamps();
         });

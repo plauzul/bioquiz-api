@@ -27,7 +27,6 @@ class SimulationsController extends Controller {
 
     public function setResult(Request $request, $idUser, $idProof) {
         $markeds = 0;
-        $values = [];
         $questions = Simulation::where('proof_id', $idProof)->get();
 
         foreach ($questions as $key => $value) {
