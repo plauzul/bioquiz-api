@@ -21,7 +21,7 @@ $app->group(['prefix' => 'api', 'middleware' => 'cors'], function() use ($app) {
         $app->post('register', 'AuthController@register');
     });
 
-    $app->group(['prefix' => 'users', 'middleware' => 'auth:api'], function() use ($app) {
+    $app->group(['prefix' => 'users'/*, 'middleware' => 'auth:api'*/], function() use ($app) {
         $app->get('/', 'UsersController@index');
         $app->get('{token}', 'UsersController@show');
         $app->delete('{id}', 'UsersController@delete');
