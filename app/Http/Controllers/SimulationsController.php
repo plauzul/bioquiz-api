@@ -7,6 +7,7 @@ use App\User;
 use App\Simulation;
 use App\Result;
 use App\Proof;
+use App\Rank;
 use Carbon\Carbon;
 
 class SimulationsController extends Controller {
@@ -74,10 +75,10 @@ class SimulationsController extends Controller {
         }
 
         $results = Result::whereDate('created_at', '=', Carbon::today()->toDateString())->first();
-
+        // Salvo os dados da porcentagem de acertos do dia na tabela Simulations
         if($results) {
             $percentage = (((intval($results->percentage) / 100) + (($markeds * 10) / 100)) / 2) * 100;
-            $results->percentage = $percentage."%";
+            $results->percentage = $percentage >= 100 ? "100%" : $percentage."%";
             $results->save();
         } else {
             $result = new Result();
@@ -86,7 +87,17 @@ class SimulationsController extends Controller {
             $result->save();
         }
 
-        return response()->json(['percentage' => ($markeds * 10)."%"]);
+        // Agora apenas acrecento mais pontos na tabela points
+        $rank = Rank::where('id_user', $idUser)->first();
+        Rank::updateOrCreate(
+            ['id_user' => $idUser],
+            ['points' => !!$rank ? $rank->points + ($markeds * 2) : 2]
+        );
+
+        return response()->json([
+            'percentage' => ($markeds * 10)."%",
+            'points' => !!$rank ? $rank->points + ($markeds * 2) : 2
+        ]);
     }
 
     public function getResult($idUser) {

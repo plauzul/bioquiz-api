@@ -33,4 +33,9 @@ $app->group(['prefix' => 'api', 'middleware' => 'cors'], function() use ($app) {
         $app->get('/proofs', 'SimulationsController@proofs');
         $app->get('/questions/{idProof}', 'SimulationsController@questions');
     });
+
+    $app->group(['prefix' => 'rank'/*, 'middleware' => 'auth:api'*/], function() use ($app) {
+        $app->get('positioning', 'RankController@total');
+        $app->get('positioning/{idUser}', 'RankController@me');
+    });
 });
