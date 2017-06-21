@@ -11,9 +11,13 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
-});
+$app->get('/', 'IndexController@index');
+$app->get('/form-register-questions', 'IndexController@formRegisterQuestions');
+$app->get('/form-register-proofs', 'IndexController@formRegisterProofs');
+$app->post('/form-register-questions-save', 'IndexController@formRegisterQuestionsSave');
+$app->post('/form-register-proofs-save', 'IndexController@formRegisterProofsSave');
+$app->get('/form-edit-proofs', 'IndexController@formEditProofs');
+$app->get('/form-edit-questions', 'IndexController@formEditQuestions');
 
 $app->group(['prefix' => 'api', 'middleware' => 'cors'], function() use ($app) {
     $app->group(['prefix' => 'auth'], function () use ($app) {

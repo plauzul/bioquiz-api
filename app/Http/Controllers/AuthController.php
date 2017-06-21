@@ -41,7 +41,7 @@ class AuthController extends Controller {
         $user->email = $request->email;
         $user->name = $request->name;
         $user->password = app('hash')->make($request->password);
-        $user->img = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
+        $user->img = isset($request['img']) ? $request->img : 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
         $user->save();
 
         $token = $jwt->attempt($request->only('email', 'password'));

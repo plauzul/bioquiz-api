@@ -12,7 +12,7 @@ class Simulation extends Model {
      * @var array
      */
     protected $fillable = [
-        'proof_id', 'theme_id', 'question', 'a', 'b', 'c', 'd', 'correct'
+        'proof_id', 'question', 'a', 'b', 'c', 'd', 'correct'
     ];
 
 }
