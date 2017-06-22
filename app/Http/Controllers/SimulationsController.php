@@ -20,7 +20,7 @@ class SimulationsController extends Controller {
         $simulations = Simulation::where('proof_id', $idProof)->get();
 
         if(!empty($simulations[0])) {
-            return $simulations;
+            return $simulations->shuffle();
         } else {
             return response()->json(['status' => 'without_simulation']);
         }
