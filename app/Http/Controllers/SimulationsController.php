@@ -27,6 +27,7 @@ class SimulationsController extends Controller {
     }
 
     public function setResult(Request $request, $idUser, $idProof) {
+        $wrongs = [];
         $markeds = 0;
         $questions = Simulation::where('proof_id', $idProof)->get();
 
@@ -34,42 +35,62 @@ class SimulationsController extends Controller {
             if($value->id == $request->idq1) {
                 if($value->correct == $request->q1) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq2) {
                 if($value->correct == $request->q2) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq3) {
                 if($value->correct == $request->q3) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq4) {
                 if($value->correct == $request->q4) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq5) {
                 if($value->correct == $request->q5) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq6) {
                 if($value->correct == $request->q6) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq7) {
                 if($value->correct == $request->q7) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq8) {
                 if($value->correct == $request->q8) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq9) {
                 if($value->correct == $request->q9) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             } elseif($value->id == $request->idq10) {
                 if($value->correct == $request->q10) {
                     $markeds += 1;
+                } else {
+                    array_push($wrongs, $value);
                 }
             }
         }
@@ -94,9 +115,12 @@ class SimulationsController extends Controller {
             ['points' => !!$rank ? $rank->points + ($markeds * 2) : 2]
         );
 
+        // Pego as questões marcadas erradas
+        
         return response()->json([
             'percentage' => ($markeds * 10)."%",
-            'points' => !!$rank ? $rank->points + ($markeds * 2) : 2
+            'points' => !!$rank ? $rank->points + ($markeds * 2) : 2,
+            'wrongs' => $wrongs
         ]);
     }
 
