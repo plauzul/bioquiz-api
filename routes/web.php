@@ -23,6 +23,7 @@ $app->group(['prefix' => 'api', 'middleware' => 'cors'], function() use ($app) {
     $app->group(['prefix' => 'auth'], function () use ($app) {
         $app->post('login', 'AuthController@login');
         $app->post('register', 'AuthController@register');
+        $app->get('refresh-token/{token}', 'AuthController@refreshToken');
     });
 
     $app->group(['prefix' => 'users'/*, 'middleware' => 'auth:api'*/], function() use ($app) {
