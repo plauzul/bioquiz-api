@@ -51,6 +51,6 @@ class AuthController extends Controller {
 
     public function refreshToken(JWTAuth $jwt, $token) {
         $jwt->setToken($token);
-        return $jwt->refresh();
+        return response()->json(['token' => $jwt->refresh()]);
     }
 }
