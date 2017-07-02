@@ -15,7 +15,7 @@ class UsersController extends Controller {
     public function show(JWTAuth $jwt, $token) {
         $jwt->setToken($token);
         try {
-            return $jwt->parseToken()->toUser();
+            return $jwt->toUser($token);
         } catch(TokenExpiredException $e) {
             return response()->json(['status' => 'token_expired'], 401);
         }

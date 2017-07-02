@@ -43,4 +43,10 @@ $app->group(['prefix' => 'api', 'middleware' => 'cors'], function() use ($app) {
         $app->get('positioning', 'RankController@total');
         $app->get('positioning/{idUser}', 'RankController@me');
     });
+
+    $app->group(['prefix' => 'password'/*, 'middleware' => 'auth:api'*/], function() use ($app) {
+        $app->post('/email', 'PasswordController@email');
+        $app->post('/verify-token/{token}', 'PasswordController@verifyToken');
+        $app->post('/reset/{token}', 'PasswordController@reset');
+    });
 });
